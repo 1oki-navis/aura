@@ -1,4 +1,4 @@
-const C="liftlog-v21";
+const C="liftlog-v22";
 const FILES=["./","index.html","manifest.json","sw.js","README.md","icon-180.png","icon-512.png","fonts/doto.woff2","fonts/bebas.woff2","fonts/mono.woff2","fonts/mono-b.woff2"];
 self.addEventListener("install",e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(FILES)))});
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

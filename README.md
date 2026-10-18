@@ -1,4 +1,4 @@
-# Lift Log
+# Aura
 
 Personal iPhone PWA workout tracker for the Phase 2 gym plan. It is a single-file app with inline CSS and JavaScript, plus a service worker and local fonts (Doto, Bebas Neue, Space Mono in `fonts/`).
 
@@ -53,7 +53,7 @@ Use **Save → Export backup** weekly or whenever the Save tab has a red dot. Im
 
 ## Offline
 
-`sw.js` uses cache `liftlog-v21`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
+`sw.js` uses cache `liftlog-v22`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
 
 ## Local test
 
@@ -117,3 +117,7 @@ After the legacy suite, `run.sh` runs `test_v16.py` (49 regression tests from th
 
 ## v21 (19 Oct 2026)
 - Font change from v20 reverted: Doto, Bebas Neue and Space Mono are back (with `fonts/` and their cache entries). Everything else from v20 stays.
+
+## v22 (19 Oct 2026)
+- Renamed to **Aura** (title, home screen name, footer, import error). Storage key `liftlog.v1` and the cache prefix are unchanged, so data carries over.
+- New icon: a dot-matrix loaded barbell with a glowing red centre, sized for the maskable safe zone.
