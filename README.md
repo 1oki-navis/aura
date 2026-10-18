@@ -1,6 +1,6 @@
 # Lift Log
 
-Personal iPhone PWA workout tracker for the Phase 2 gym plan. It is a single-file app with inline CSS and JavaScript, plus a service worker. Text uses the iPhone system font (SF Pro via `-apple-system`), so there are no font files.
+Personal iPhone PWA workout tracker for the Phase 2 gym plan. It is a single-file app with inline CSS and JavaScript, plus a service worker and local fonts (Doto, Bebas Neue, Space Mono in `fonts/`).
 
 ## Data
 
@@ -53,7 +53,7 @@ Use **Save → Export backup** weekly or whenever the Save tab has a red dot. Im
 
 ## Offline
 
-`sw.js` uses cache `liftlog-v20`, network-first with a 2.5 s timeout for the app shell, cache-first for icons and the manifest, and deletes old caches on activate.
+`sw.js` uses cache `liftlog-v21`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
 
 ## Local test
 
@@ -115,3 +115,5 @@ After the legacy suite, `run.sh` runs `test_v16.py` (49 regression tests from th
 - Add exercise asks for sets x reps (and step kg for kg exercises) before the plan saves.
 - Hosting moved from Netlify to GitHub Pages (no Netlify badge). Data is per site, so export a JSON backup on the old URL and import it on the new one.
 
+## v21 (19 Oct 2026)
+- Font change from v20 reverted: Doto, Bebas Neue and Space Mono are back (with `fonts/` and their cache entries). Everything else from v20 stays.

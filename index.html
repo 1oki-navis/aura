@@ -11,27 +11,31 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Lift Log</title>
 <style>
+@font-face{font-family:Doto;src:url(fonts/doto.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:Bebas;src:url(fonts/bebas.woff2) format("woff2");font-display:swap}
+@font-face{font-family:Mono;src:url(fonts/mono.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Mono;src:url(fonts/mono-b.woff2) format("woff2");font-weight:700;font-display:swap}
 :root{--red:#D71921;--w:#fff;--g1:#8a8a8a;--g15:#6e6e6e;--g2:#4a4a4a;--g3:#1c1c1c}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:#000;color:var(--w);overflow-x:hidden;max-width:100%}
-body{font:15px/1.45 -apple-system,system-ui,"Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;
+body{font:14px/1.5 Mono,ui-monospace,Menlo,monospace;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;
  padding:calc(env(safe-area-inset-top) + 18px) 24px calc(env(safe-area-inset-bottom) + 110px)}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.lab{font:600 11px/1.45 -apple-system,system-ui,"Helvetica Neue",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--g1)}
+.lab{font:400 10px/1.5 Mono,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--g1)}
 .red{color:var(--red)!important}
-.dot{font-family:-apple-system,system-ui,"Helvetica Neue",sans-serif;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
-.bebas{font:700 26px/1.1 -apple-system,system-ui,"Helvetica Neue",sans-serif;letter-spacing:-.01em}
+.dot{font-family:Doto,Mono,monospace;font-weight:800;letter-spacing:.02em;line-height:1}
+.bebas{font:400 30px/1 Bebas,Impact,sans-serif;letter-spacing:.02em}
 header{padding:14px 0 26px}
-.title{font:700 40px/1.05 -apple-system,system-ui,"Helvetica Neue",sans-serif;letter-spacing:-.02em;margin-top:6px}
-.kick{font:600 15px/1.2 -apple-system,system-ui,"Helvetica Neue",sans-serif;letter-spacing:.02em;color:var(--red)}
+.title{font:400 56px/.92 Bebas,Impact,sans-serif;letter-spacing:.01em;margin-top:6px}
+.kick{font:400 22px/1 Bebas,Impact,sans-serif;letter-spacing:.06em;color:var(--red)}
 .kick.sec{margin:44px 0 16px}
 .tabs{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;margin-bottom:30px}
 .tabs::-webkit-scrollbar{display:none}
-.tabs button{font:600 16px/1 -apple-system,system-ui,"Helvetica Neue",sans-serif;letter-spacing:0;color:var(--g15);white-space:nowrap;padding:12px 0;min-height:44px;position:relative}
+.tabs button{font:400 20px/1 Bebas,sans-serif;letter-spacing:.05em;color:var(--g15);white-space:nowrap;padding:12px 0;min-height:44px;position:relative}
 .tabs button.on{color:var(--w)}
 .tabs button.on::after{content:"";position:absolute;left:50%;bottom:-10px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--red)}
 .hero{padding:26px 0 8px;border-top:1px dashed var(--g2)}
-.hero .big{font-size:52px;font-weight:700;margin:14px 0 8px;letter-spacing:-.03em}
+.hero .big{font-size:58px;margin:14px 0 8px;letter-spacing:.04em}
 .trio{display:grid;grid-template-columns:repeat(3,1fr);margin:34px 0 26px}
 .trio>div{border-left:1px solid var(--g3);padding-left:14px}.trio>div:first-child{border:0;padding:0}
 .dot.n{font-size:32px;margin-bottom:8px}.dot.n small{font-size:16px;color:var(--g2)}
@@ -43,7 +47,7 @@ header{padding:14px 0 26px}
 .dots.wide{gap:9px}
 .rows{display:flex;flex-direction:column}
 .ex.open{background:#0a0a0a;margin:0 -14px;padding:0 14px;border-radius:14px;border:1px solid var(--g3)}.ex.open+.ex{border-top:0}
-.ring{display:grid;place-items:center;font:700 11px/1 -apple-system,system-ui,"Helvetica Neue",sans-serif;color:#000}.ex.part .ring{border-color:var(--red)}.ex.done .tgt .dot{color:var(--g1)}
+.ring{display:grid;place-items:center;font:700 10px/1 Mono,monospace;color:#000}.ex.part .ring{border-color:var(--red)}.ex.done .tgt .dot{color:var(--g1)}
 .feel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 0 14px 40px}.feel .lab{grid-column:1/-1}.feel button{min-height:44px;border:1px solid var(--g2);border-radius:999px;font-weight:600}.feel button:active{border-color:var(--red);color:var(--red)}
 .nm{overflow-wrap:anywhere}.tip{overflow-wrap:anywhere}.kvr .lab,.best .lab{overflow-wrap:anywhere}
 select{min-height:44px}#planed .link{margin-top:6px}
@@ -53,7 +57,7 @@ select{min-height:44px}#planed .link{margin-top:6px}
 .ex.done .ring{background:var(--red);border-color:var(--red)}
 .ex.open .ring{border-color:var(--w)}
 .sp{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
-.nm{font:500 17px/1.3 -apple-system,system-ui,"Helvetica Neue",sans-serif;color:var(--w)}
+.nm{font:400 16px/1.35 -apple-system,"Helvetica Neue",sans-serif;color:var(--w)}
 .ex.done .nm{color:var(--g1)}
 .tgt{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
 .tgt .dot{font-size:24px}
@@ -63,7 +67,7 @@ select{min-height:44px}#planed .link{margin-top:6px}
 .sets{display:flex;flex-direction:column}
 .set{display:grid;grid-template-columns:36px 1fr 44px;align-items:center;gap:8px;padding:2px 0;border-bottom:1px dashed var(--g3);width:100%;text-align:left;min-height:48px}
 .set:first-child{border-top:1px dashed var(--g3)}
-.v{font:400 16px/1.3 -apple-system,system-ui,"Helvetica Neue",sans-serif;font-variant-numeric:tabular-nums;color:var(--w);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.v{font:400 16px/1.3 Mono,monospace;color:var(--w);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .x{color:var(--g15);font-size:13px;min-width:44px;min-height:44px;display:grid;place-items:center}
 .steps{display:grid;grid-template-columns:1fr;gap:20px}
 .ctl{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
@@ -71,11 +75,11 @@ select{min-height:44px}#planed .link{margin-top:6px}
 .ctl button:active{background:var(--red);border-color:var(--red)}
 .ctl input{flex:1;width:100%;min-width:0;background:none;border:0;color:var(--w);text-align:center;font-size:28px;outline:none;min-height:44px}
 .btn{display:block;width:100%;text-align:center;background:var(--w);color:#000;border-radius:999px;padding:16px;
- font:600 15px/1 -apple-system,system-ui,"Helvetica Neue",sans-serif;letter-spacing:.02em;text-transform:uppercase}
+ font:700 12px/1 Mono,monospace;letter-spacing:.18em;text-transform:uppercase}
 .btn:active{background:var(--red);color:var(--w)}
 .btn.ghost{background:none;color:var(--w);border:1px solid var(--g2)}
 .btn.sm{width:auto;padding:14px 20px;flex:none;min-height:44px}
-input:not(.dot),select,textarea{font:16px -apple-system,system-ui,"Helvetica Neue",sans-serif;color:var(--w);background:none;border:0;border-bottom:1px solid var(--g2);padding:10px 0;width:100%;min-height:44px;outline:none;border-radius:0;-webkit-appearance:none} textarea{resize:none;overflow:hidden;line-height:1.4;display:block}
+input:not(.dot),select,textarea{font:16px Mono,monospace;color:var(--w);background:none;border:0;border-bottom:1px solid var(--g2);padding:10px 0;width:100%;min-height:44px;outline:none;border-radius:0;-webkit-appearance:none} textarea{resize:none;overflow:hidden;line-height:1.4;display:block}
 input:focus{border-color:var(--red)}
 input::placeholder{color:var(--g2)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -93,7 +97,7 @@ input[type=date]{min-height:44px;color-scheme:dark}
 .chart .gl{stroke:var(--g3);stroke-dasharray:2 4}.chart .vl{stroke:var(--g2);stroke-dasharray:2 3}
 .chart .ln{fill:none;stroke:var(--red);stroke-width:1.6;stroke-linejoin:round}
 .chart .pt{fill:#000;stroke:var(--red);stroke-width:2}
-.chart .ax{font:9px -apple-system,system-ui,"Helvetica Neue",sans-serif;fill:var(--g2);letter-spacing:.05em}
+.chart .ax{font:8px Mono,monospace;fill:var(--g2);letter-spacing:.05em}
 .chart-empty{padding:30px 0;text-align:center;border-top:1px dashed var(--g3);border-bottom:1px dashed var(--g3)}
 .sess{border-top:1px solid var(--g3);padding:24px 0 22px;cursor:pointer}.sess:last-child{border-bottom:1px solid var(--g3)}
 .sess-h{display:flex;align-items:flex-end;gap:14px;margin-bottom:10px}
@@ -112,12 +116,12 @@ nav{position:fixed;z-index:10;left:0;right:0;bottom:0;display:flex;justify-conte
  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-top:1px solid var(--g3);padding:10px 8px calc(env(safe-area-inset-bottom) + 8px)}
 nav button{display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--g15);flex:1;position:relative;padding:8px 0;min-height:48px}
 nav svg{width:22px;height:22px}
-nav span{font:500 10px -apple-system,system-ui,"Helvetica Neue",sans-serif;letter-spacing:.04em;text-transform:uppercase}
+nav span{font:400 10px Mono,monospace;letter-spacing:.14em;text-transform:uppercase}
 nav button.on{color:var(--w)}
 nav button.on span{color:var(--red)}
 nav button.on::before{content:"";position:absolute;top:-11px;width:16px;height:2px;background:var(--red)}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 92px);transform:translateX(-50%) translateY(20px);opacity:0;
- background:var(--w);color:#000;font:600 13px -apple-system,system-ui,"Helvetica Neue",sans-serif;letter-spacing:.02em;text-transform:uppercase;padding:12px 20px;border-radius:999px;transition:.25s;pointer-events:none;white-space:nowrap;max-width:calc(100vw - 32px);overflow:hidden;text-overflow:ellipsis}
+ background:var(--w);color:#000;font:700 11px Mono,monospace;letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;border-radius:999px;transition:.25s;pointer-events:none;white-space:nowrap;max-width:calc(100vw - 32px);overflow:hidden;text-overflow:ellipsis}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.act{pointer-events:auto}
 #toast::before{content:"● ";color:var(--red)}
@@ -461,7 +465,7 @@ function addBody(){const d=$('#bd').value,kg=num($('#bk').value),w=num($('#bw').
  // A waist-only entry keeps the weight already logged that day, and vice versa
  DB.body.push({d,kg:kg||(old&&old.kg)||0,waist:w||(old&&old.waist)||0});save();toast('Saved · undo',4000,()=>{DB.body=DB.body.filter(x=>x.d!==d); if(old)DB.body.push(old); save(); render()});render()}
 function delBody(d){const old=DB.body.find(x=>x.d===d); if(!old)return; DB.body=DB.body.filter(x=>x.d!==d);save();toast('Entry deleted · undo',4000,()=>{DB.body.push(old);save();render()});render()}
-function vMore(){const last=localStorage.getItem('liftlog.backup'), cnt=+(localStorage.getItem('liftlog.backup.count')||0); return head('Backup','Data lives on this phone only')+`<div class="pair"><div><div class="lab">Last export</div><div class="bebas ${last?'':'red'}">${last?fd(last,1):'Never'}</div><div class="lab">${plur(Math.max(0,DB.sets.length-cnt),'set')} since</div></div><div><div class="lab">Storage</div><div class="bebas ${PERSISTED?'':'red'}">${PERSISTED?'Persistent':'Not persistent'}</div></div></div><div class="kick sec">Back up</div><p class="note">Every week or two. Save to iCloud Drive › Gym Plan.</p><button class="btn" data-act="exportJSON">Export backup</button><div class="kick sec">Send to coach</div><button class="btn ghost" data-act="exportCSV">Export CSV</button><div class="kick sec">Restore</div><p class="note">Merge adds new rows. Replace overwrites this phone after confirmation and keeps an undo copy.</p><button class="btn ghost" data-act="pickImport" data-mode="merge">Merge backup</button><button class="btn ghost" data-act="pickImport" data-mode="replace">Replace backup</button><input id="imp" type="file" accept=".json,application/json" hidden><p class="foot lab">Lift Log · v20 · Phase 2</p>`}
+function vMore(){const last=localStorage.getItem('liftlog.backup'), cnt=+(localStorage.getItem('liftlog.backup.count')||0); return head('Backup','Data lives on this phone only')+`<div class="pair"><div><div class="lab">Last export</div><div class="bebas ${last?'':'red'}">${last?fd(last,1):'Never'}</div><div class="lab">${plur(Math.max(0,DB.sets.length-cnt),'set')} since</div></div><div><div class="lab">Storage</div><div class="bebas ${PERSISTED?'':'red'}">${PERSISTED?'Persistent':'Not persistent'}</div></div></div><div class="kick sec">Back up</div><p class="note">Every week or two. Save to iCloud Drive › Gym Plan.</p><button class="btn" data-act="exportJSON">Export backup</button><div class="kick sec">Send to coach</div><button class="btn ghost" data-act="exportCSV">Export CSV</button><div class="kick sec">Restore</div><p class="note">Merge adds new rows. Replace overwrites this phone after confirmation and keeps an undo copy.</p><button class="btn ghost" data-act="pickImport" data-mode="merge">Merge backup</button><button class="btn ghost" data-act="pickImport" data-mode="replace">Replace backup</button><input id="imp" type="file" accept=".json,application/json" hidden><p class="foot lab">Lift Log · v21 · Phase 2</p>`}
 function importJSON(inp,mode='merge'){const f=inp.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{try{const raw=JSON.parse(rd.result); if(!raw||!Array.isArray(raw.sets)||!Array.isArray(raw.body)||!Array.isArray(raw.runs))throw new Error('partial backup'); const nd=migrate(raw), blank=!DB.sets.length&&!DB.body.length&&!DB.runs.length;
  // Nothing to merge into, so a restore takes the backup whole (plan, notes, units) with no prompt
  if(blank)mode='replace'; if(mode==='replace'&&!blank&&!confirm(`Replace this phone with ${plur(nd.sets.length,'imported set')}?`))return; try{localStorage.setItem('liftlog.prev',JSON.stringify(DB))}catch(e){} const old=DB; if(mode==='replace')DB=nd; else{const ids=new Set(DB.sets.map(s=>s.id)); DB.sets=DB.sets.concat(nd.sets.filter(s=>!ids.has(s.id))); DB.body=[...DB.body,...nd.body].reduce((m,x)=>(m.set(x.d,x),m),new Map()).values(); DB.body=[...DB.body]; const rk=x=>x.d+'|'+x.km+'|'+x.sec, have=new Set(DB.runs.map(rk)); DB.runs=DB.runs.concat(nd.runs.filter(x=>!have.has(rk(x))&&!DB.runs.some(y=>y.id===x.id))); Object.assign(DB.fin,nd.fin||{}); Object.entries(nd.notes).forEach(([k,v])=>{if(!DB.notes[k])DB.notes[k]=v}); Object.entries(nd.feel||{}).forEach(([k,v])=>{if(!DB.feel[k])DB.feel[k]=v}); DB.units={...nd.units,...DB.units}} PLANED=null; REDIT=null; EDIT=null; OPEN=null; SES=null; INP={}; if(!save())return; EMPTY_START=false; CORRUPT=false; toast(`Imported ${plur(nd.sets.length,'set')} · undo`,4000,()=>{DB=old;save();render()}); render()}catch(e){toast('Not a Lift Log backup')}}; rd.readAsText(f)}
