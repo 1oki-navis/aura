@@ -53,7 +53,7 @@ Use **Save → Export backup** weekly or whenever the Save tab has a red dot. Im
 
 ## Offline
 
-`sw.js` uses cache `liftlog-v22`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
+`sw.js` uses cache `liftlog-v23`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
 
 ## Local test
 
@@ -121,3 +121,13 @@ After the legacy suite, `run.sh` runs `test_v16.py` (49 regression tests from th
 ## v22 (19 Oct 2026)
 - Renamed to **Aura** (title, home screen name, footer, import error). Storage key `liftlog.v1` and the cache prefix are unchanged, so data carries over.
 - New icon: a dot-matrix loaded barbell with a glowing red centre, sized for the maskable safe zone.
+
+## v23 (19 Oct 2026) - Athletic look plan
+- New default plan from `Gym Plan/PLAN - Athletic look DRAFT for review.md`. Legs first, forearms on both Upper days, 2 min rest everywhere.
+- Session order: Lower A > Upper A > Lower B > Upper B.
+- Migration (`pv` < 23): if the saved plan still has v22 exercises, the 4 sessions are swapped for the new plan and the order is reset. Custom sessions are kept at the end. History, notes and units are untouched. Runs once (`pv: 23`).
+- Steps match the gym: pins and plates +5 kg, Leg Press +10 kg.
+- Tests: `test_v23.py`. Older suites pin the v22 plan via `v22-plan.json`.
+- Fix: the old hack Calf Raise migration looked up Seated Calf Raise in Lower A only. v23 moved it to Lower B, so it would have inserted an empty exercise. It now searches every session.
+- Assisted Pull-up and Assisted Dip hints say "then less assist" (vague, no fixed kg).
+- Legacy tests now read order, version and plan from the app instead of hardcoding v22. Totals: legacy 128, v16 49, v20 15, v23 7, all passing.

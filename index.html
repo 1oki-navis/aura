@@ -145,7 +145,9 @@ nav .navdot{position:absolute;top:4px;left:calc(50% + 10px);width:6px;height:6px
 <script>
 
 // ---------- Plan (source: Gym Log Phase 2 / coach targets, 5 Oct) ----------
-const ORDER0 = ["Upper A","Lower A","Upper B","Lower B"];
+const ORDER0 = ["Lower A","Upper A","Lower B","Upper B"];
+// v22 default exercises. If the phone plan still has any, v23 swaps in the new plan once
+const V22_SIG=["Hanging Leg Raise","Knee Raise","DB Overhead Triceps","Rear Kick","Decline Press","DB Glute Bridge"];
 // The rotation is user-editable (rename, add, remove) and lives in DB.order; this mirrors it
 let ORDER = ORDER0.slice();
 // Phase 1 full-body sessions imported from Hevy. Shown in Log and Stats, never in the rotation.
@@ -154,46 +156,46 @@ const COLORS = {"Upper A":"--ua","Lower A":"--la","Upper B":"--ub","Lower B":"--
 const SUBT = {"Upper A":"Chest · Back · Arms","Lower A":"Legs · Core","Upper B":"Upper body #2","Lower B":"Legs #2"};
 // unit: kg | BW (bodyweight) | sec (seconds) | min (cardio, logged in minutes). lb:true = less kg is stronger (assist machines)
 const PLAN = {
- "Upper A":[
-  {n:"Bike warmup",s:"5 min",t:5,u:"min",tip:"Easy spin"},
-  {n:"Chest Press",s:"3 x 8-10",t:25,u:"kg",tip:"Flat pin machine. Add 2.5-5 kg once all sets hit the top reps"},
-  {n:"Lat Pulldown",s:"3 x 10-12",t:35,u:"kg",tip:"When all 3 sets hit the top reps, add 2.5-5 kg"},
-  {n:"Assisted Dip",s:"3 x 8-10",t:30,u:"kg",lb:true,tip:"Log the assist kg. Drop 2.5-5 kg of assist when all sets hit the top reps"},
-  {n:"Abcore Crunch",s:"2 x 12",t:10,u:"kg",tip:"Resistance holder only. +2 reps before adding weight"},
-  {n:"Abcore Side",s:"2 x 10 / side",t:10,u:"kg",tip:"Red handle swivels the seat"},
-  {n:"Shoulder Press",s:"3 x 10-12",t:5,u:"kg",tip:"Plate total. Do before incline. +1-2 reps a session"},
-  {n:"Incline Press",s:"3 x 10-12",t:10,u:"kg",tip:"Clean reps first, then add 2.5 kg"},
-  {n:"Bicep Curl",s:"2 x 12",t:17.5,u:"kg",tip:"Add 2.5 kg once both sets hit the top reps"}],
  "Lower A":[
   {n:"Bike warmup",s:"5 min",t:5,u:"min",tip:"Easy spin"},
-  {n:"Hack Squat",s:"3 x 8-10",t:0,u:"kg",tip:"Log the plates you add in kg"},
-  {n:"Leg Press",s:"3 x 10-12",t:80,u:"kg",tip:"Total plates. Add 5-10 kg once all sets hit the top reps"},
-  {n:"Leg Extension",s:"2 x 12-15",t:17.5,u:"kg",tip:"New. Adjust after set 1"},
-  {n:"Seated Leg Curl",s:"3 x 10-12",t:25,u:"kg",tip:"Add 2.5-5 kg when all sets hit the top reps"},
-  {n:"Seated Calf Raise",s:"3 x 12-15",t:30,u:"kg",tip:"Pause at the bottom stretch. Add 5 kg when all sets hit the top reps"},
-  {n:"Abductor",s:"2 x 15",t:22.5,u:"kg",tip:"New. Adjust after set 1"},
-  {n:"Knee Raise",s:"2 x 10",t:0,u:"BW",tip:"Slow, no swinging. +2 reps next time"},
-  {n:"Plank",s:"2 x 45 s",t:45,u:"sec",tip:"Add 5-10 seconds when both holds feel solid"}],
- "Upper B":[
-  {n:"Bike warmup",s:"5 min",t:5,u:"min",tip:"Easy spin"},
-  {n:"Assisted Pull-up",s:"3 x 6-10",t:35,u:"kg",lb:true,tip:"1st floor chin/dip combo. Log the assist kg. Drop 2.5-5 kg of assist when all sets hit the top reps"},
-  {n:"Decline Press",s:"3 x 8-10",t:10,u:"kg",tip:"Iso-lateral, plate total. Adjust after set 1, add 2.5-5 kg when all sets hit the top reps"},
-  {n:"Mid Row",s:"3 x 10-12",t:20,u:"kg",tip:"Pulldown combo, row station. Squeeze shoulder blades. Add 2.5-5 kg when all sets hit the top reps"},
-  {n:"Reverse Fly",s:"2 x 12-15",t:10,u:"kg",tip:"Light, slow, rear shoulders. +2 reps before adding weight"},
-  {n:"DB Lateral Raise",s:"3 x 12-15",t:8,u:"kg",tip:"Log both dumbbells together. Stop at shoulder height, no swinging"},
-  {n:"DB Hammer Curl",s:"2 x 10-12",t:10,u:"kg",tip:"Log both dumbbells together. Add 1-2 kg per hand when both sets hit the top reps"},
-  {n:"DB Overhead Triceps",s:"2 x 10-12",t:7.5,u:"kg",tip:"One dumbbell, both hands. Elbows in"},
-  {n:"Dead Bug",s:"2 x 12",t:0,u:"BW",tip:"Lower back flat on the floor. +2 reps next time"}],
+  {n:"Hack Squat",s:"3 x 6-10",t:20,u:"kg",st:5,tip:"All sets at 10, then add 5 kg"},
+  {n:"Leg Press",s:"3 x 10-15",t:100,u:"kg",st:10,tip:"Total plates. All sets at 15, then add 10 kg"},
+  {n:"Leg Extension",s:"2 x 12-15",t:30,u:"kg",st:5,tip:"Both sets at 15, then add a pin"},
+  {n:"Seated Leg Curl",s:"4 x 10-12",t:30,u:"kg",st:5,tip:"#19. All sets at 12, then add 5 kg"},
+  {n:"Standing Calf Raise",s:"4 x 10-15",t:30,u:"kg",st:5,tip:"#22 leverage. Full stretch, 1 s pause up top. All sets at 15, then add 5 kg"},
+  {n:"Side Plank",s:"2 x 30-60 s / side",t:30,u:"sec",tip:"Add 10 s a week"}],
+ "Upper A":[
+  {n:"Elliptical warmup",s:"5 min",t:5,u:"min",tip:"Easy"},
+  {n:"Lat Pulldown",s:"3 x 8-12",t:40,u:"kg",st:5,tip:"All sets at 12, then add a pin"},
+  {n:"Chest Press",s:"3 x 8-12",t:10,u:"kg",st:5,tip:"Iso-lateral, flat. Plate total. All sets at 12, then add 5 kg"},
+  {n:"Mid Row",s:"3 x 10-12",t:30,u:"kg",st:5,tip:"All sets at 12, then add a pin"},
+  {n:"Incline Press",s:"2 x 8-12",t:10,u:"kg",st:5,tip:"Iso-lateral, incline setting. Both sets at 12, then add 5 kg"},
+  {n:"DB Lateral Raise",s:"3 x 12-20",t:5,u:"kg",st:5,tip:"Both dumbbells together. 20 strict reps on all sets, then add 5 kg"},
+  {n:"Assisted Dip",s:"2 x 8-12",t:35,u:"kg",st:5,lb:true,tip:"Log the assist kg. Both sets at 12, then less assist"},
+  {n:"Wrist Curl",s:"2 x 15-20",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms up. Both sets at 20, then add a pin"},
+  {n:"Reverse Wrist Curl",s:"2 x 15-20",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms down. Both sets at 20, then add a pin"},
+  {n:"Incline walk",s:"10 min",t:10,u:"min",tip:"Incline 8, 5.0 km/h. +1 incline a week to 12, then +0.3 km/h"}],
  "Lower B":[
   {n:"Bike warmup",s:"5 min",t:5,u:"min",tip:"Easy spin"},
-  {n:"DB Glute Bridge",s:"3 x 12",t:10,u:"kg",tip:"Dumbbell on hips, pause 1 s at the top. Add 2.5-5 kg when all sets feel easy"},
-  {n:"Leverage Squat",s:"3 x 8-10",t:0,u:"kg",tip:"Body-Solid lever. Start with the empty arm, add plates once form is solid"},
-  {n:"Lying Leg Curl",s:"3 x 10-12",t:20,u:"kg",tip:"Slow lowering. Add 2.5-5 kg when all sets hit the top reps"},
-  {n:"DB Walking Lunge",s:"2 x 10 / leg",t:10,u:"kg",tip:"Log both dumbbells together. Short controlled steps"},
-  {n:"Rear Kick",s:"2 x 12 / leg",t:5,u:"kg",tip:"Glute kickback. Light, squeeze at the top"},
-  {n:"Adductor",s:"2 x 15",t:20,u:"kg",tip:"Inner thigh. Adjust after set 1"},
-  {n:"Standing Calf Raise",s:"3 x 12-15",t:0,u:"kg",tip:"Leverage machine. Full stretch at the bottom, pause at the top"},
-  {n:"Hanging Leg Raise",s:"2 x 8-10",t:0,u:"BW",tip:"Straight legs. Finish with bent knees if needed. Pause at the bottom, no swing"}]
+  {n:"Leverage Squat",s:"3 x 10-12",t:30,u:"kg",st:5,tip:"#22. Add 5 kg only when 3 x 12 is pain-free the next morning"},
+  {n:"DB Walking Lunge",s:"3 x 8-12 / leg",t:10,u:"kg",st:5,tip:"Both dumbbells together. All sets at 12, then add 5 kg"},
+  {n:"Lying Leg Curl",s:"4 x 10-12",t:20,u:"kg",st:5,tip:"#20. All sets at 12, then add 5 kg"},
+  {n:"Abductor",s:"2 x 15-20",t:20,u:"kg",st:5,tip:"Push knees OUT. Both sets at 20, then add a pin"},
+  {n:"Seated Calf Raise",s:"3 x 12-20",t:30,u:"kg",st:5,tip:"#18. Ball of foot on the block edge. All sets at 20, then add 5 kg"},
+  {n:"Abcore Side",s:"2 x 10-15 / side",t:10,u:"kg",st:5,tip:"1st floor. Both sets at 15, then add 5 kg"},
+  {n:"Abcore Crunch",s:"Optional 2 x 12-15",t:10,u:"kg",st:5,tip:"Optional, only if under 50 min"}],
+ "Upper B":[
+  {n:"Elliptical warmup",s:"5 min",t:5,u:"min",tip:"Easy"},
+  {n:"Shoulder Press",s:"3 x 10-15",t:5,u:"kg",st:5,tip:"2nd floor. Plate total. All sets at 15, then add 5 kg"},
+  {n:"Seated Dip",s:"2 x 10-15",t:40,u:"kg",st:5,tip:"2nd floor. Both sets at 15, then add 5 kg"},
+  {n:"Low Row",s:"3 x 10-12",t:10,u:"kg",st:5,tip:"2nd floor. Plate total. All sets at 12, then add 5 kg"},
+  {n:"Assisted Pull-up",s:"3 x 6-10",t:35,u:"kg",st:5,lb:true,tip:"1st floor. Log the assist kg. All sets at 10, then less assist"},
+  {n:"DB Lateral Raise",s:"3 x 12-20",t:5,u:"kg",st:5,tip:"Both dumbbells together. 20 strict reps on all sets, then add 5 kg"},
+  {n:"DB Rear Delt Raise",s:"2 x 12-20",t:5,u:"kg",st:5,tip:"Bent over 45 deg. Both sets at 20, then add 5 kg"},
+  {n:"DB Hammer Curl",s:"2 x 10-15",t:10,u:"kg",st:5,tip:"Both dumbbells together. Both sets at 15, then add 5 kg"},
+  {n:"Wrist Curl",s:"2 x 15-20",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms up. Both sets at 20, then add a pin"},
+  {n:"Reverse Wrist Curl",s:"2 x 15-20",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms down. Both sets at 20, then add a pin"},
+  {n:"Incline walk",s:"10 min",t:10,u:"min",tip:"Same as Upper A"}]
 };
 
 // ---------- Storage ----------
@@ -201,7 +203,7 @@ const KEY="liftlog.v1";
 const PLAN0 = JSON.parse(JSON.stringify(PLAN));
 function clone(x){return JSON.parse(JSON.stringify(x))}
 const FEELS=['easy','good','hard'];
-function freshDB(){return {ver:2,order:ORDER0.slice(),created:Date.now(),sets:[],body:[],runs:[],plan:clone(PLAN0),custom:[],notes:{},feel:{},fin:{},lastExportCount:0}}
+function freshDB(){return {ver:2,pv:23,order:ORDER0.slice(),created:Date.now(),sets:[],body:[],runs:[],plan:clone(PLAN0),custom:[],notes:{},feel:{},fin:{},lastExportCount:0}}
 // Old seed hints gave absolute targets. Swap them for the relative v15 wording.
 const TIPFIX={"Flat pin machine. Up from 20":"Chest Press","Hit 3x12, then go 40":"Lat Pulldown","Assist kg. Less assist = harder":"Assisted Dip","Resistance holder only":"Abcore Crunch","Plate total. Do BEFORE incline":"Shoulder Press","Reset from 15, clean reps":"Incline Press","Up from 15":"Bicep Curl","Total plates. Hit 3x12, then 90":"Leg Press","Did 25 x12 x2 before":"Seated Leg Curl","Slow, no swinging":"Knee Raise","Reps box = seconds held":"Plank"};
 // Exercises that only exist in imported history still need the right unit
@@ -226,13 +228,15 @@ function migrate(d){
   // v15: assist became plain kg with a less-is-stronger flag, and absolute tips became relative
   Object.values(d.plan).forEach(a=>Array.isArray(a)&&a.forEach(p=>{if(p.u==='assist'){p.u='kg';p.lb=true} if(!['kg','BW','sec','min'].includes(p.u))p.u='kg'; const fx=TIPFIX[p.tip]; if(fx&&fx===p.n){const np=PLAN0Flat().find(x=>x.n===fx); if(np)p.tip=np.tip}}));
   d.custom.forEach(c=>{if(c&&c.u==='sled')c.u='kg'}); // v19: fill sessions that were still empty on the phone, and swap Lower A hack calf raise for seated
- d.order.forEach(o=>{if(Array.isArray(d.plan[o])&&!d.plan[o].length&&PLAN0[o]&&PLAN0[o].length)d.plan[o]=clone(PLAN0[o])}); if(Array.isArray(d.plan['Lower A'])){const i=d.plan['Lower A'].findIndex(x=>x.n==='Calf Raise'&&/hack/i.test(x.tip||''));if(i>=0)d.plan['Lower A'][i]=clone(PLAN0['Lower A'].find(x=>x.n==='Seated Calf Raise'))} d.notes=d.notes&&typeof d.notes==='object'?d.notes:{}; d.fin=d.fin&&typeof d.fin==='object'?d.fin:{}; delete d.checks; d.created=d.created||Date.now(); d.lastExportCount=d.lastExportCount||0;
+ d.order.forEach(o=>{if(Array.isArray(d.plan[o])&&!d.plan[o].length&&PLAN0[o]&&PLAN0[o].length)d.plan[o]=clone(PLAN0[o])}); if(Array.isArray(d.plan['Lower A'])){const i=d.plan['Lower A'].findIndex(x=>x.n==='Calf Raise'&&/hack/i.test(x.tip||''));if(i>=0)d.plan['Lower A'][i]=clone(Object.values(PLAN0).flat().find(x=>x.n==='Seated Calf Raise'))} d.notes=d.notes&&typeof d.notes==='object'?d.notes:{}; d.fin=d.fin&&typeof d.fin==='object'?d.fin:{}; delete d.checks; d.created=d.created||Date.now(); d.lastExportCount=d.lastExportCount||0;
   d.sets=d.sets.filter(s=>s&&typeof s==='object').map((s,i)=>({id:safeId(s.id)||('s'+Date.now()+i),d:String(s.d||''),ses:typeof s.ses==='string'&&s.ses.trim()?s.ses.trim():d.order[0],ex:String(s.ex||''),kg:+s.kg||0,r:+s.r||0,note:String(s.note||''),w:!!s.w})).filter(s=>/^\d{4}-\d\d-\d\d$/.test(s.d)&&s.ex&&s.r>=0);
   d.runs=d.runs.filter(r=>r&&typeof r==='object').map((r,i)=>({id:safeId(r.id)||('r'+Date.now()+i),d:String(r.d||''),km:+r.km||0,sec:+r.sec||0,hr:+r.hr||0,note:String(r.note||'')})).filter(r=>/^\d{4}-\d\d-\d\d$/.test(r.d)&&r.km&&r.sec);
   d.body=d.body.filter(b=>b&&typeof b==='object').map(b=>({d:String(b.d||''),kg:+b.kg||0,waist:+b.waist||0})).filter(b=>/^\d{4}-\d\d-\d\d$/.test(b.d));
     // v20: notes are per session (date|exercise). Old per-exercise notes move to that exercise's last session
   {const N={}, DK=/^\d{4}-\d\d-\d\d\|./; Object.entries(d.notes).forEach(([k,v])=>{if(typeof v!=='string'||!v.trim())return; if(DK.test(k)){N[k]=v;return} const ds=d.sets.filter(x=>x.ex===k).map(x=>x.d).sort(); if(ds.length){const nk=ds[ds.length-1]+'|'+k; if(!N[nk]&&!d.notes[nk])N[nk]=v}}); d.notes=N}
   {const F={}, f=d.feel&&typeof d.feel==='object'&&!Array.isArray(d.feel)?d.feel:{}; Object.entries(f).forEach(([k,v])=>{if(/^\d{4}-\d\d-\d\d\|./.test(k)&&FEELS.includes(v))F[k]=v}); d.feel=F}
+  // v23: athletic look plan. Replace the old default sessions and order; history, notes and custom sessions stay
+  if((d.pv||0)<23){const old=Object.values(d.plan).some(a=>Array.isArray(a)&&a.some(x=>V22_SIG.includes(x.n))); if(old){const extra=d.order.filter(o=>!ORDER0.includes(o)); d.order=[...ORDER0,...extra].slice(0,8); ORDER0.forEach(o=>{d.plan[o]=clone(PLAN0[o])})} d.pv=23}
   d.ver=2; return d;
 }
 DB=migrate(DB);
@@ -465,7 +469,7 @@ function addBody(){const d=$('#bd').value,kg=num($('#bk').value),w=num($('#bw').
  // A waist-only entry keeps the weight already logged that day, and vice versa
  DB.body.push({d,kg:kg||(old&&old.kg)||0,waist:w||(old&&old.waist)||0});save();toast('Saved · undo',4000,()=>{DB.body=DB.body.filter(x=>x.d!==d); if(old)DB.body.push(old); save(); render()});render()}
 function delBody(d){const old=DB.body.find(x=>x.d===d); if(!old)return; DB.body=DB.body.filter(x=>x.d!==d);save();toast('Entry deleted · undo',4000,()=>{DB.body.push(old);save();render()});render()}
-function vMore(){const last=localStorage.getItem('liftlog.backup'), cnt=+(localStorage.getItem('liftlog.backup.count')||0); return head('Backup','Data lives on this phone only')+`<div class="pair"><div><div class="lab">Last export</div><div class="bebas ${last?'':'red'}">${last?fd(last,1):'Never'}</div><div class="lab">${plur(Math.max(0,DB.sets.length-cnt),'set')} since</div></div><div><div class="lab">Storage</div><div class="bebas ${PERSISTED?'':'red'}">${PERSISTED?'Persistent':'Not persistent'}</div></div></div><div class="kick sec">Back up</div><p class="note">Every week or two. Save to iCloud Drive › Gym Plan.</p><button class="btn" data-act="exportJSON">Export backup</button><div class="kick sec">Send to coach</div><button class="btn ghost" data-act="exportCSV">Export CSV</button><div class="kick sec">Restore</div><p class="note">Merge adds new rows. Replace overwrites this phone after confirmation and keeps an undo copy.</p><button class="btn ghost" data-act="pickImport" data-mode="merge">Merge backup</button><button class="btn ghost" data-act="pickImport" data-mode="replace">Replace backup</button><input id="imp" type="file" accept=".json,application/json" hidden><p class="foot lab">Aura · v22 · Phase 2</p>`}
+function vMore(){const last=localStorage.getItem('liftlog.backup'), cnt=+(localStorage.getItem('liftlog.backup.count')||0); return head('Backup','Data lives on this phone only')+`<div class="pair"><div><div class="lab">Last export</div><div class="bebas ${last?'':'red'}">${last?fd(last,1):'Never'}</div><div class="lab">${plur(Math.max(0,DB.sets.length-cnt),'set')} since</div></div><div><div class="lab">Storage</div><div class="bebas ${PERSISTED?'':'red'}">${PERSISTED?'Persistent':'Not persistent'}</div></div></div><div class="kick sec">Back up</div><p class="note">Every week or two. Save to iCloud Drive › Gym Plan.</p><button class="btn" data-act="exportJSON">Export backup</button><div class="kick sec">Send to coach</div><button class="btn ghost" data-act="exportCSV">Export CSV</button><div class="kick sec">Restore</div><p class="note">Merge adds new rows. Replace overwrites this phone after confirmation and keeps an undo copy.</p><button class="btn ghost" data-act="pickImport" data-mode="merge">Merge backup</button><button class="btn ghost" data-act="pickImport" data-mode="replace">Replace backup</button><input id="imp" type="file" accept=".json,application/json" hidden><p class="foot lab">Aura · v23 · Athletic</p>`}
 function importJSON(inp,mode='merge'){const f=inp.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{try{const raw=JSON.parse(rd.result); if(!raw||!Array.isArray(raw.sets)||!Array.isArray(raw.body)||!Array.isArray(raw.runs))throw new Error('partial backup'); const nd=migrate(raw), blank=!DB.sets.length&&!DB.body.length&&!DB.runs.length;
  // Nothing to merge into, so a restore takes the backup whole (plan, notes, units) with no prompt
  if(blank)mode='replace'; if(mode==='replace'&&!blank&&!confirm(`Replace this phone with ${plur(nd.sets.length,'imported set')}?`))return; try{localStorage.setItem('liftlog.prev',JSON.stringify(DB))}catch(e){} const old=DB; if(mode==='replace')DB=nd; else{const ids=new Set(DB.sets.map(s=>s.id)); DB.sets=DB.sets.concat(nd.sets.filter(s=>!ids.has(s.id))); DB.body=[...DB.body,...nd.body].reduce((m,x)=>(m.set(x.d,x),m),new Map()).values(); DB.body=[...DB.body]; const rk=x=>x.d+'|'+x.km+'|'+x.sec, have=new Set(DB.runs.map(rk)); DB.runs=DB.runs.concat(nd.runs.filter(x=>!have.has(rk(x))&&!DB.runs.some(y=>y.id===x.id))); Object.assign(DB.fin,nd.fin||{}); Object.entries(nd.notes).forEach(([k,v])=>{if(!DB.notes[k])DB.notes[k]=v}); Object.entries(nd.feel||{}).forEach(([k,v])=>{if(!DB.feel[k])DB.feel[k]=v}); DB.units={...nd.units,...DB.units}} PLANED=null; REDIT=null; EDIT=null; OPEN=null; SES=null; INP={}; if(!save())return; EMPTY_START=false; CORRUPT=false; toast(`Imported ${plur(nd.sets.length,'set')} · undo`,4000,()=>{DB=old;save();render()}); render()}catch(e){toast('Not an Aura backup')}}; rd.readAsText(f)}
