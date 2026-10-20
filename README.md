@@ -17,17 +17,9 @@ The plan editor offers four plain units:
 
 The old `sled` unit (v14) and `assist` unit (v15) migrate to `kg`. Assisted Dip keeps a hidden `lb` (lower is better) flag, so less assist still counts as a PR and progression, and it stays out of volume and 1RM.
 
-## Next-session targets
+## Targets (v24)
 
-After the last planned set of an exercise, the card asks **How did it feel? Easy / Good / Hard** (saved in `DB.feel["date|exercise"]`). Next time, the red line shows tailored per-set targets (for example `Next 40 kg × 12, 12, 9`), and each set's kg and reps prefill from them (still editable):
-
-- **Easy**, every set at the top of the range: add the exercise's own step kg, reps back to the bottom of the range.
-- **Easy**, otherwise: +2 reps per set, capped at the top of the range.
-- **Good**: +1 rep on sets below the top. All sets at the top: add a step.
-- **Hard**: repeat exactly. Hard two sessions in a row: drop one step.
-- No rating counts as Easy if every set hit the top, otherwise Good.
-- Bodyweight: Easy +2 reps, Good +1. Seconds: Easy +10 s, Good +5 s. Assisted (less is stronger): the step lowers the assist.
-- Each set keeps its own weight, so mixed-kg sessions progress per set.
+Each exercise card shows three labelled lines: `Target 3 sets · 10-12 reps`, `Last 40 kg · 12, 12, 8` (red; mixed weights read `10 kg · 10, 8 then 5 kg · 8`, assisted reads `35 kg assist · ...`, timed reads `30 s, 30 s`, new reads `None yet`) and `Today 2 of 3 sets` once you log. No auto "Next" suggestions and no "How did it feel" prompt. Each set prefills with the same set from last session (or your previous set today). You decide when to add reps or weight. Rule: reps up to the top of the range on every set, then add one step.
 
 ## Notes
 
@@ -53,7 +45,7 @@ Use **Save → Export backup** weekly or whenever the Save tab has a red dot. Im
 
 ## Offline
 
-`sw.js` uses cache `liftlog-v23`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
+`sw.js` uses cache `liftlog-v24`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
 
 ## Local test
 
@@ -131,3 +123,10 @@ After the legacy suite, `run.sh` runs `test_v16.py` (49 regression tests from th
 - Fix: the old hack Calf Raise migration looked up Seated Calf Raise in Lower A only. v23 moved it to Lower B, so it would have inserted an empty exercise. It now searches every session.
 - Assisted Pull-up and Assisted Dip hints say "then less assist" (vague, no fixed kg).
 - Legacy tests now read order, version and plan from the app instead of hardcoding v22. Totals: legacy 128, v16 49, v20 15, v23 7, all passing.
+
+## v24 (20 Oct 2026) - Simple targets
+- Removed the auto "Next" targets and the feel prompt. They were unreliable.
+- Card uses labelled lines: Target / Last / Today, sentence case, slightly bigger text.
+- Ranges: Standing Calf Raise 4 x 12-20; DB Lateral Raise, DB Rear Delt Raise, Wrist Curl, Reverse Wrist Curl 15-25. Migration (`pv` < 24) only changes them if you haven't edited them.
+- Prefill = same set last session. Old `DB.feel` data is kept but unused.
+- Tests: two v20 feel/next tests replaced with v24 tests.

@@ -57,6 +57,7 @@ select{min-height:44px}#planed .link{margin-top:6px}
 .ex.done .ring{background:var(--red);border-color:var(--red)}
 .ex.open .ring{border-color:var(--w)}
 .sp{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.ln{font:400 12px/1.45 Mono,monospace;letter-spacing:.04em;color:#bdbdbd;overflow-wrap:anywhere}.ln b{font-weight:400;display:inline-block;min-width:52px;color:var(--g1);text-transform:uppercase;font-size:10px;letter-spacing:.14em}.ln.red{color:var(--red)}
 .nm{font:400 16px/1.35 -apple-system,"Helvetica Neue",sans-serif;color:var(--w)}
 .ex.done .nm{color:var(--g1)}
 .tgt{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
@@ -162,7 +163,7 @@ const PLAN = {
   {n:"Leg Press",s:"3 x 10-15",t:100,u:"kg",st:10,tip:"Total plates. All sets at 15, then add 10 kg"},
   {n:"Leg Extension",s:"2 x 12-15",t:30,u:"kg",st:5,tip:"Both sets at 15, then add a pin"},
   {n:"Seated Leg Curl",s:"4 x 10-12",t:30,u:"kg",st:5,tip:"#19. All sets at 12, then add 5 kg"},
-  {n:"Standing Calf Raise",s:"4 x 10-15",t:30,u:"kg",st:5,tip:"#22 leverage. Full stretch, 1 s pause up top. All sets at 15, then add 5 kg"},
+  {n:"Standing Calf Raise",s:"4 x 12-20",t:30,u:"kg",st:5,tip:"#22 leverage. Full stretch, 1 s pause up top. All sets at 15, then add 5 kg"},
   {n:"Side Plank",s:"2 x 30-60 s / side",t:30,u:"sec",tip:"Add 10 s a week"}],
  "Upper A":[
   {n:"Elliptical warmup",s:"5 min",t:5,u:"min",tip:"Easy"},
@@ -170,10 +171,10 @@ const PLAN = {
   {n:"Chest Press",s:"3 x 8-12",t:10,u:"kg",st:5,tip:"Iso-lateral, flat. Plate total. All sets at 12, then add 5 kg"},
   {n:"Mid Row",s:"3 x 10-12",t:30,u:"kg",st:5,tip:"All sets at 12, then add a pin"},
   {n:"Incline Press",s:"2 x 8-12",t:10,u:"kg",st:5,tip:"Iso-lateral, incline setting. Both sets at 12, then add 5 kg"},
-  {n:"DB Lateral Raise",s:"3 x 12-20",t:5,u:"kg",st:5,tip:"Both dumbbells together. 20 strict reps on all sets, then add 5 kg"},
+  {n:"DB Lateral Raise",s:"3 x 15-25",t:5,u:"kg",st:5,tip:"Both dumbbells together. 20 strict reps on all sets, then add 5 kg"},
   {n:"Assisted Dip",s:"2 x 8-12",t:35,u:"kg",st:5,lb:true,tip:"Log the assist kg. Both sets at 12, then less assist"},
-  {n:"Wrist Curl",s:"2 x 15-20",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms up. Both sets at 20, then add a pin"},
-  {n:"Reverse Wrist Curl",s:"2 x 15-20",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms down. Both sets at 20, then add a pin"},
+  {n:"Wrist Curl",s:"2 x 15-25",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms up. Both sets at 20, then add a pin"},
+  {n:"Reverse Wrist Curl",s:"2 x 15-25",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms down. Both sets at 20, then add a pin"},
   {n:"Incline walk",s:"10 min",t:10,u:"min",tip:"Incline 8, 5.0 km/h. +1 incline a week to 12, then +0.3 km/h"}],
  "Lower B":[
   {n:"Bike warmup",s:"5 min",t:5,u:"min",tip:"Easy spin"},
@@ -190,11 +191,11 @@ const PLAN = {
   {n:"Seated Dip",s:"2 x 10-15",t:40,u:"kg",st:5,tip:"2nd floor. Both sets at 15, then add 5 kg"},
   {n:"Low Row",s:"3 x 10-12",t:10,u:"kg",st:5,tip:"2nd floor. Plate total. All sets at 12, then add 5 kg"},
   {n:"Assisted Pull-up",s:"3 x 6-10",t:35,u:"kg",st:5,lb:true,tip:"1st floor. Log the assist kg. All sets at 10, then less assist"},
-  {n:"DB Lateral Raise",s:"3 x 12-20",t:5,u:"kg",st:5,tip:"Both dumbbells together. 20 strict reps on all sets, then add 5 kg"},
-  {n:"DB Rear Delt Raise",s:"2 x 12-20",t:5,u:"kg",st:5,tip:"Bent over 45 deg. Both sets at 20, then add 5 kg"},
+  {n:"DB Lateral Raise",s:"3 x 15-25",t:5,u:"kg",st:5,tip:"Both dumbbells together. 20 strict reps on all sets, then add 5 kg"},
+  {n:"DB Rear Delt Raise",s:"2 x 15-25",t:5,u:"kg",st:5,tip:"Bent over 45 deg. Both sets at 20, then add 5 kg"},
   {n:"DB Hammer Curl",s:"2 x 10-15",t:10,u:"kg",st:5,tip:"Both dumbbells together. Both sets at 15, then add 5 kg"},
-  {n:"Wrist Curl",s:"2 x 15-20",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms up. Both sets at 20, then add a pin"},
-  {n:"Reverse Wrist Curl",s:"2 x 15-20",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms down. Both sets at 20, then add a pin"},
+  {n:"Wrist Curl",s:"2 x 15-25",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms up. Both sets at 20, then add a pin"},
+  {n:"Reverse Wrist Curl",s:"2 x 15-25",t:5,u:"kg",st:5,tip:"#13 forearm machine, palms down. Both sets at 20, then add a pin"},
   {n:"Incline walk",s:"10 min",t:10,u:"min",tip:"Same as Upper A"}]
 };
 
@@ -203,7 +204,7 @@ const KEY="liftlog.v1";
 const PLAN0 = JSON.parse(JSON.stringify(PLAN));
 function clone(x){return JSON.parse(JSON.stringify(x))}
 const FEELS=['easy','good','hard'];
-function freshDB(){return {ver:2,pv:23,order:ORDER0.slice(),created:Date.now(),sets:[],body:[],runs:[],plan:clone(PLAN0),custom:[],notes:{},feel:{},fin:{},lastExportCount:0}}
+function freshDB(){return {ver:2,pv:24,order:ORDER0.slice(),created:Date.now(),sets:[],body:[],runs:[],plan:clone(PLAN0),custom:[],notes:{},feel:{},fin:{},lastExportCount:0}}
 // Old seed hints gave absolute targets. Swap them for the relative v15 wording.
 const TIPFIX={"Flat pin machine. Up from 20":"Chest Press","Hit 3x12, then go 40":"Lat Pulldown","Assist kg. Less assist = harder":"Assisted Dip","Resistance holder only":"Abcore Crunch","Plate total. Do BEFORE incline":"Shoulder Press","Reset from 15, clean reps":"Incline Press","Up from 15":"Bicep Curl","Total plates. Hit 3x12, then 90":"Leg Press","Did 25 x12 x2 before":"Seated Leg Curl","Slow, no swinging":"Knee Raise","Reps box = seconds held":"Plank"};
 // Exercises that only exist in imported history still need the right unit
@@ -237,6 +238,7 @@ function migrate(d){
   {const F={}, f=d.feel&&typeof d.feel==='object'&&!Array.isArray(d.feel)?d.feel:{}; Object.entries(f).forEach(([k,v])=>{if(/^\d{4}-\d\d-\d\d\|./.test(k)&&FEELS.includes(v))F[k]=v}); d.feel=F}
   // v23: athletic look plan. Replace the old default sessions and order; history, notes and custom sessions stay
   if((d.pv||0)<23){const old=Object.values(d.plan).some(a=>Array.isArray(a)&&a.some(x=>V22_SIG.includes(x.n))); if(old){const extra=d.order.filter(o=>!ORDER0.includes(o)); d.order=[...ORDER0,...extra].slice(0,8); ORDER0.forEach(o=>{d.plan[o]=clone(PLAN0[o])})} d.pv=23}
+ if(d.pv<24){const R24={"Standing Calf Raise":["4 x 10-15","4 x 12-20"],"DB Lateral Raise":["3 x 12-20","3 x 15-25"],"DB Rear Delt Raise":["2 x 12-20","2 x 15-25"],"Wrist Curl":["2 x 15-20","2 x 15-25"],"Reverse Wrist Curl":["2 x 15-20","2 x 15-25"]}; Object.values(d.plan).forEach(a=>Array.isArray(a)&&a.forEach(x=>{const r=R24[x.n]; if(r&&x.s===r[0])x.s=r[1]})); d.pv=24}
   d.ver=2; return d;
 }
 DB=migrate(DB);
@@ -383,7 +385,7 @@ function parseTarget(p,last,today){const ft=firstTarget(p,last); if(!ft||!last||
  const reps=t.map(x=>x.r).join(', '), same=t.every(x=>x.kg===t[0].kg), u=p.u;
  const text=u==='sec'?`Next ${reps} sec`:u==='BW'?`Next ${reps} reps`:same?`Next ${kgTxt(t[0].kg)} kg × ${reps}`:'Next '+t.map(x=>`${kgTxt(x.kg)}×${x.r}`).join(', ');
  return {kg:t[0].kg,r:t[0].r,text,sets:t}}
-function defInp(p,mine,last){if(EDIT){const s=DB.sets.find(x=>x.id===EDIT);if(s)return {kg:s.kg,r:s.r}} if(CARDIO(p)){const c=mine[0]; return {kg:0,r:c?c.r:cardioMin(p),note:c?c.note:''}} const nt=parseTarget(p,last,gymDate()), tg=nt&&nt.sets&&nt.sets[mine.length]; if(tg)return {kg:tg.kg,r:tg.r}; if(mine.length){const l=mine[mine.length-1];return {kg:l.kg,r:l.r}} if(nt)return {kg:nt.kg,r:nt.r}; return {kg:p.u==='kg'?(+p.t||0):0,r:p.u==='sec'?(+p.t||45):10}}
+function defInp(p,mine,last){if(EDIT){const s=DB.sets.find(x=>x.id===EDIT);if(s)return {kg:s.kg,r:s.r}} if(CARDIO(p)){const c=mine[0]; return {kg:0,r:c?c.r:cardioMin(p),note:c?c.note:''}} if(mine.length){const l=mine[mine.length-1];return {kg:l.kg,r:l.r}} if(last&&last.sets.length){const l=last.sets[Math.min(mine.length,last.sets.length-1)];return {kg:l.kg,r:l.r}} return {kg:p.u==='kg'?(+p.t||0):0,r:p.u==='sec'?(+p.t||45):10}}
 const cardioMin=p=>+(((p.s||'').match(/(\d+)\s*min/i)||[])[1])||+p.t||5;
 const plannedSets=p=>CARDIO(p)?1:(+(((p.s||'').match(/^\s*(\d+)\s*x/i)||[])[1])||0);
 const finKey=(d,ses)=>d+'|'+ses;
@@ -400,14 +402,16 @@ function cardioRow(p,done,open){const mine=done.filter(s=>s.ex===p.n), c=mine[0]
  if(!open)return h+`</div>`;
  h+=`<div class="ex-b"><div class="steps one"><div class="stp"><div class="lab">Minutes</div><div class="ctl"><button data-act="adj" data-n="${esc(p.n)}" data-k="r" data-d="-1" aria-label="Fewer minutes">−</button><input id="r" class="dot" inputmode="decimal" aria-label="Minutes" value="${kgTxt(v.r)}"><button data-act="adj" data-n="${esc(p.n)}" data-k="r" data-d="1" aria-label="More minutes">+</button></div></div></div><input id="cn" aria-label="Cardio notes" placeholder="Notes · level, feel" value="${esc(v.note||'')}" maxlength="300"><button class="btn" data-act="logCardio" data-n="${esc(p.n)}">${c?'Update cardio':'Log cardio'}</button>${c?`<div class="links"><span></span><button class="link lab" data-act="rmCardio" data-n="${esc(p.n)}">Remove</button></div>`:''}</div>`;
  return h+`</div>`}
+function lastLine(ss,u,lb){if(u==='sec')return ss.map(x=>x.r+' s').join(', '); if(u==='BW')return ss.map(x=>x.r).join(', ')+' reps'; const g=[]; ss.forEach(x=>{const l=g[g.length-1]; if(l&&l.kg===x.kg)l.r.push(x.r); else g.push({kg:x.kg,r:[x.r]})}); return g.map(x=>`${kgTxt(x.kg)} kg${lb?' assist':''} · ${x.r.join(', ')}`).join(' then ')}
+function fmtT(t){const m=/^(optional\s+)?(\d+)\s*x\s*([\d-]+)\s*(s)?\s*(?:\/\s*(\w+))?$/i.exec((t||'').trim()); if(!m)return esc(t||''); return `${m[1]?'Optional · ':''}${m[2]} sets · ${m[3]} ${m[4]?'s':'reps'}${m[5]?' per '+m[5]:''}`}
 function exRow(p,done,today){const mine=done.filter(s=>s.ex===p.n), open=OPEN===p.n;
  if(CARDIO(p))return cardioRow(p,done,open);
- const last=lastFor(p.n,today), nt=parseTarget(p,last,today), u=p.u, planned=plannedSets(p), fin=complete(p,done)&&mine.length>0;
+ const last=lastFor(p.n,today), u=p.u, planned=plannedSets(p), fin=complete(p,done)&&mine.length>0;
  const lastTop=last?(u==='sec'||u==='BW'?Math.max(...last.sets.map(x=>x.r)):(p.lb?Math.min:Math.max)(...last.sets.map(x=>x.kg))):null;
  const tgtV=u==='BW'?(lastTop??'BW'):u==='sec'?(lastTop??(+p.t||0)):kgTxt(lastTop??(+p.t||0)), unit=(last?'last ':'start ')+(u==='sec'?'sec':u==='BW'?'reps':'kg');
- const nh=mine.filter(hard).length, fk=today+'|'+p.n, felt=DB.feel[fk], sub=mine.length?(planned?`${nh} / ${planned} sets done`:`${plur(nh,'set')} done`)+(felt&&fin?` · felt ${felt}`:''):esc(p.s||'');
- const ask=fin&&!felt&&!EDIT?`<div class="feel"><span class="lab">How did it feel?</span>${FEELS.map(f=>`<button data-act="feel" data-n="${esc(p.n)}" data-f="${f}">${f[0].toUpperCase()+f.slice(1)}</button>`).join('')}</div>`:'';
- let h=`<div class="ex ${open?'open':''} ${fin?'done':mine.length?'part':''}"><button class="ex-h" data-act="tog" data-n="${esc(p.n)}"><span class="ring">${fin?'✓':''}</span><span class="sp"><span class="nm">${esc(p.n)}</span><span class="lab">${sub}</span>${nt&&!fin?`<span class="lab red">${nt.text}</span>`:''}</span><span class="tgt"><span class="dot">${tgtV}</span><span class="lab">${unit}</span></span></button>${ask}`;
+ const nh=mine.filter(hard).length, fk=today+'|'+p.n, felt=DB.feel[fk], sub=`<span class="ln"><b>Target</b>${fmtT(p.s)}</span><span class="ln red"><b>Last</b>${last?lastLine(last.sets,u,p.lb):'None yet'}</span>`+(mine.length?`<span class="ln"><b>Today</b>${planned?`${nh} of ${planned} sets`:plur(nh,'set')}</span>`:'');
+ const ask='';
+ let h=`<div class="ex ${open?'open':''} ${fin?'done':mine.length?'part':''}"><button class="ex-h" data-act="tog" data-n="${esc(p.n)}"><span class="ring">${fin?'✓':''}</span><span class="sp"><span class="nm">${esc(p.n)}</span>${sub}</span><span class="tgt"><span class="dot">${tgtV}</span><span class="lab">${unit}</span></span></button>${ask}`;
  if(!open)return h+`</div>`;
  const v=INP[p.n]||defInp(p,mine,last); INP[p.n]=v; const noKg=u!=='kg', rL=u==='sec'?'Seconds':'Reps', step=u==='sec'?5:1, ei=mine.findIndex(x=>x.id===EDIT);
  const ln=last&&DB.notes[last.d+'|'+p.n], info=last?`<p class="tip"><span class="red">Last ${fd(last.d)}</span> · ${groupSets(last.sets,u)}</p>${ln?`<p class="tip">${esc(ln)}</p>`:''}`:'';
@@ -469,7 +473,7 @@ function addBody(){const d=$('#bd').value,kg=num($('#bk').value),w=num($('#bw').
  // A waist-only entry keeps the weight already logged that day, and vice versa
  DB.body.push({d,kg:kg||(old&&old.kg)||0,waist:w||(old&&old.waist)||0});save();toast('Saved · undo',4000,()=>{DB.body=DB.body.filter(x=>x.d!==d); if(old)DB.body.push(old); save(); render()});render()}
 function delBody(d){const old=DB.body.find(x=>x.d===d); if(!old)return; DB.body=DB.body.filter(x=>x.d!==d);save();toast('Entry deleted · undo',4000,()=>{DB.body.push(old);save();render()});render()}
-function vMore(){const last=localStorage.getItem('liftlog.backup'), cnt=+(localStorage.getItem('liftlog.backup.count')||0); return head('Backup','Data lives on this phone only')+`<div class="pair"><div><div class="lab">Last export</div><div class="bebas ${last?'':'red'}">${last?fd(last,1):'Never'}</div><div class="lab">${plur(Math.max(0,DB.sets.length-cnt),'set')} since</div></div><div><div class="lab">Storage</div><div class="bebas ${PERSISTED?'':'red'}">${PERSISTED?'Persistent':'Not persistent'}</div></div></div><div class="kick sec">Back up</div><p class="note">Every week or two. Save to iCloud Drive › Gym Plan.</p><button class="btn" data-act="exportJSON">Export backup</button><div class="kick sec">Send to coach</div><button class="btn ghost" data-act="exportCSV">Export CSV</button><div class="kick sec">Restore</div><p class="note">Merge adds new rows. Replace overwrites this phone after confirmation and keeps an undo copy.</p><button class="btn ghost" data-act="pickImport" data-mode="merge">Merge backup</button><button class="btn ghost" data-act="pickImport" data-mode="replace">Replace backup</button><input id="imp" type="file" accept=".json,application/json" hidden><p class="foot lab">Aura · v23 · Athletic</p>`}
+function vMore(){const last=localStorage.getItem('liftlog.backup'), cnt=+(localStorage.getItem('liftlog.backup.count')||0); return head('Backup','Data lives on this phone only')+`<div class="pair"><div><div class="lab">Last export</div><div class="bebas ${last?'':'red'}">${last?fd(last,1):'Never'}</div><div class="lab">${plur(Math.max(0,DB.sets.length-cnt),'set')} since</div></div><div><div class="lab">Storage</div><div class="bebas ${PERSISTED?'':'red'}">${PERSISTED?'Persistent':'Not persistent'}</div></div></div><div class="kick sec">Back up</div><p class="note">Every week or two. Save to iCloud Drive › Gym Plan.</p><button class="btn" data-act="exportJSON">Export backup</button><div class="kick sec">Send to coach</div><button class="btn ghost" data-act="exportCSV">Export CSV</button><div class="kick sec">Restore</div><p class="note">Merge adds new rows. Replace overwrites this phone after confirmation and keeps an undo copy.</p><button class="btn ghost" data-act="pickImport" data-mode="merge">Merge backup</button><button class="btn ghost" data-act="pickImport" data-mode="replace">Replace backup</button><input id="imp" type="file" accept=".json,application/json" hidden><p class="foot lab">Aura · v24 · Simple</p>`}
 function importJSON(inp,mode='merge'){const f=inp.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{try{const raw=JSON.parse(rd.result); if(!raw||!Array.isArray(raw.sets)||!Array.isArray(raw.body)||!Array.isArray(raw.runs))throw new Error('partial backup'); const nd=migrate(raw), blank=!DB.sets.length&&!DB.body.length&&!DB.runs.length;
  // Nothing to merge into, so a restore takes the backup whole (plan, notes, units) with no prompt
  if(blank)mode='replace'; if(mode==='replace'&&!blank&&!confirm(`Replace this phone with ${plur(nd.sets.length,'imported set')}?`))return; try{localStorage.setItem('liftlog.prev',JSON.stringify(DB))}catch(e){} const old=DB; if(mode==='replace')DB=nd; else{const ids=new Set(DB.sets.map(s=>s.id)); DB.sets=DB.sets.concat(nd.sets.filter(s=>!ids.has(s.id))); DB.body=[...DB.body,...nd.body].reduce((m,x)=>(m.set(x.d,x),m),new Map()).values(); DB.body=[...DB.body]; const rk=x=>x.d+'|'+x.km+'|'+x.sec, have=new Set(DB.runs.map(rk)); DB.runs=DB.runs.concat(nd.runs.filter(x=>!have.has(rk(x))&&!DB.runs.some(y=>y.id===x.id))); Object.assign(DB.fin,nd.fin||{}); Object.entries(nd.notes).forEach(([k,v])=>{if(!DB.notes[k])DB.notes[k]=v}); Object.entries(nd.feel||{}).forEach(([k,v])=>{if(!DB.feel[k])DB.feel[k]=v}); DB.units={...nd.units,...DB.units}} PLANED=null; REDIT=null; EDIT=null; OPEN=null; SES=null; INP={}; if(!save())return; EMPTY_START=false; CORRUPT=false; toast(`Imported ${plur(nd.sets.length,'set')} · undo`,4000,()=>{DB=old;save();render()}); render()}catch(e){toast('Not an Aura backup')}}; rd.readAsText(f)}
