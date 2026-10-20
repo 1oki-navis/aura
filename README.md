@@ -45,7 +45,7 @@ Use **Save → Export backup** weekly or whenever the Save tab has a red dot. Im
 
 ## Offline
 
-`sw.js` uses cache `liftlog-v24`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
+`sw.js` uses cache `liftlog-v25`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
 
 ## Local test
 
@@ -130,3 +130,8 @@ After the legacy suite, `run.sh` runs `test_v16.py` (49 regression tests from th
 - Ranges: Standing Calf Raise 4 x 12-20; DB Lateral Raise, DB Rear Delt Raise, Wrist Curl, Reverse Wrist Curl 15-25. Migration (`pv` < 24) only changes them if you haven't edited them.
 - Prefill = same set last session. Old `DB.feel` data is kept but unused.
 - Tests: two v20 feel/next tests replaced with v24 tests.
+
+## v25 (20 Oct 2026) - Cleaner cards, notes in CSV
+- Closed cards show only Target. The dated "Last <date>" line and last session's note show once, inside the open card.
+- CSV export has a new "Exercise note" column. Each day's exercise note sits on the first set row; notes with no sets get their own row.
+- Tests: `test_csv_exports_exercise_notes` (v23 suite), updated `test_v24_shows_target_and_last_and_prefills_last`.
