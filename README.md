@@ -45,7 +45,7 @@ Use **Save → Export backup** weekly or whenever the Save tab has a red dot. Im
 
 ## Offline
 
-`sw.js` uses cache `liftlog-v25`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
+`sw.js` uses cache `liftlog-v26`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
 
 ## Local test
 
@@ -135,3 +135,12 @@ After the legacy suite, `run.sh` runs `test_v16.py` (49 regression tests from th
 - Closed cards show only Target. The dated "Last <date>" line and last session's note show once, inside the open card.
 - CSV export has a new "Exercise note" column. Each day's exercise note sits on the first set row; notes with no sets get their own row.
 - Tests: `test_csv_exports_exercise_notes` (v23 suite), updated `test_v24_shows_target_and_last_and_prefills_last`.
+
+## v26 (22 Oct 2026) - Start / work to + Next hint
+- Closed card: `Sets 3`, `Reps start 8 → work to 12` (timed: `Hold start 30 s → work to 60 s per side`), then `Today` once you log. Last stays inside the open card (v25).
+- Green `Next` hint, read-only, never changes weights. Uses last session's working sets at the heaviest weight (lightest assist for assisted):
+  - every planned set at the top: `All at 12, add weight`
+  - any set past the top: `Too easy, add weight`
+  - assisted: `take 5 kg less assist`; timed: `make it harder`
+  - fewer sets than planned, or any set below the top, no range, or done today: no hint
+- Tests: `test_v26_next_hint_cases`, `test_v26_card_shows_next_hint_and_hides_when_done` (v23 suite).
