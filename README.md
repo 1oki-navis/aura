@@ -1,4 +1,4 @@
-# Aura
+# Stride
 
 Personal iPhone PWA workout tracker for the Phase 2 gym plan. It is a single-file app with inline CSS and JavaScript, plus a service worker and local fonts (Doto, Bebas Neue, Space Mono in `fonts/`).
 
@@ -45,7 +45,7 @@ Use **Save → Export backup** weekly or whenever the Save tab has a red dot. Im
 
 ## Offline
 
-`sw.js` uses cache `liftlog-v26`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
+`sw.js` uses cache `liftlog-v27`, network-first with a 2.5 s timeout for the app shell, cache-first for fonts, icons and the manifest, and deletes old caches on activate.
 
 ## Local test
 
@@ -144,3 +144,7 @@ After the legacy suite, `run.sh` runs `test_v16.py` (49 regression tests from th
   - assisted: `take 5 kg less assist`; timed: `make it harder`
   - fewer sets than planned, or any set below the top, no range, or done today: no hint
 - Tests: `test_v26_next_hint_cases`, `test_v26_card_shows_next_hint_and_hides_when_done` (v23 suite).
+
+## v27 (22 Oct 2026) - Renamed to Stride
+- Renamed **Aura** to **Stride** (title, home screen name, footer, empty screen, import error). Storage key `liftlog.v1` and cache prefix unchanged, so data carries over. Re-add to the home screen to update the icon name.
+- Version bumped so installed apps refresh the cached manifest (cache-first) and pick up the new name.
