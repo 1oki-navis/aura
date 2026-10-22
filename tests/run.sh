@@ -8,7 +8,8 @@ if [ -z "${STRIDE_APP:-}" ]; then
   if [ -f "$HERE/../index.html" ]; then STRIDE_APP="$(cd "$HERE/.." && pwd)"; else STRIDE_APP="$HOME/Downloads/gym-app"; fi
 fi
 export STRIDE_APP
-VENV="$HOME/.copilot/session-state/c1fb52d9-6476-4d2e-a4a5-572348b68684/files/venv/bin/python"
+# Local venv: python3 -m venv tests/.venv && tests/.venv/bin/pip install playwright && tests/.venv/bin/python -m playwright install webkit
+VENV="$HERE/.venv/bin/python"
 if [ -z "${PY:-}" ]; then if [ -x "$VENV" ]; then PY="$VENV"; else PY=python3; fi; fi
 START="${STRIDE_START:-$HOME/Library/Mobile Documents/com~apple~CloudDocs/Gym Plan/liftlog-start.json}"
 EXPORT="${STRIDE_EXPORT:-$HERE/v22-export.json}"

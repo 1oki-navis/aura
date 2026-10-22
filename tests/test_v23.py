@@ -76,8 +76,8 @@ def test_extra_session_is_kept_after_migration(br):
 
 def test_version_is_v23(br):
     ctx, pg = page_with(br, base_db())
-    assert_("liftlog-v27" in (APP / "sw.js").read_text(), "sw")
-    assert_("Stride · v27" in (APP / "index.html").read_text(), "footer")
+    assert_("liftlog-v28" in (APP / "sw.js").read_text(), "sw")
+    assert_("Stride · v28" in (APP / "index.html").read_text(), "footer")
 
 
 def test_v24_ranges_migrate_only_if_unedited(br):
@@ -133,9 +133,17 @@ def test_v26_card_shows_next_hint_and_hides_when_done(br):
     html = pg.evaluate("(()=>{const p={n:'Leg Press',s:'3 x 10-15',u:'kg',st:10}; return tgtLines(p)})()")
     assert_("Sets" in html and "start 10 → work to 15" in html, html)
     html = pg.evaluate("tgtLines({n:'Side Plank',s:'2 x 30-60 s / side',u:'sec'})")
-    assert_("Hold" in html and "start 30 s → work to 60 s per side" in html, html)
+    assert_("<b>Sets</b>2 · per side" in html and "<b>Hold</b>start 30 → work to 60 s<" in html, html)
     html = pg.evaluate("tgtLines({n:'Abcore Crunch',s:'Optional 2 x 12-15',u:'kg'})")
     assert_("Optional · 2" in html, html)
+
+
+def test_v28_next_hint_only_in_open_card(br):
+    ctx, pg = page_with(br, base_db())
+    src = pg.evaluate("exRow.toString()")
+    assert_("tip ok" in src and "Next" in src, "Next hint not rendered in open card")
+    closed = pg.evaluate("[...document.querySelectorAll('.ex:not(.open) .ex-sum, .ex:not(.open) summary')].map(e=>e.textContent).join('|')")
+    assert_("Next ·" not in closed, closed)
 
 
 def main():

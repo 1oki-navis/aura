@@ -3,8 +3,10 @@
 Playwright WebKit suites run at an iPhone 17 Pro sized viewport (402 x 874, touch, mobile).
 
 ```sh
-pip install playwright && python -m playwright install webkit
-sh tests/run.sh
+python3 -m venv tests/.venv
+tests/.venv/bin/pip install playwright
+tests/.venv/bin/python -m playwright install webkit
+sh tests/run.sh   # uses tests/.venv automatically, or set PY
 ```
 
 | Suite | What it covers |

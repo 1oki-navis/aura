@@ -2,6 +2,11 @@
 
 Newest first. Each version is one commit on `main` (v20 onward). `sw.js` cache name and the footer always carry the same version.
 
+## v28 (22 Oct 2026) - Per side on the Sets line
+- `/ side` and `/ leg` targets now read `Sets 2 · per side` and `Hold start 30 → work to 60 s`, so nothing wraps on a phone.
+- Next hint stays open-card only (from v27).
+- Tests: 204 pass (legacy 128, v16 49, v20 15, v23 12). Updated the Side Plank target assertion, added `test_v28_next_hint_only_in_open_card`. Test runner now uses a local `tests/.venv`.
+
 ## v27 (22 Oct 2026) - Renamed to Stride
 - Renamed **Aura** to **Stride** (title, home screen name, footer, empty screen, import error). Storage key `liftlog.v1` and cache prefix unchanged, so data carries over. Re-add to the home screen to update the icon name.
 - Version bumped so installed apps refresh the cached manifest (cache-first) and pick up the new name.

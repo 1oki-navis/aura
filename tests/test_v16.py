@@ -524,7 +524,7 @@ def test_user_complaints_stay_fixed(br):
 def test_footer_and_sw_version(br):
     sw = (APP / "sw.js").read_text(); html = (APP / "index.html").read_text()
     v = re.search(r'liftlog-(v\d+)', sw).group(1)
-    assert_(v == "v27" and f"Stride · {v}" in html, v)
+    assert_(v == "v28" and f"Stride · {v}" in html, v)
 
 
 def test_sw_caches_every_file(br):
