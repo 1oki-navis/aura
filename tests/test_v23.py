@@ -76,8 +76,8 @@ def test_extra_session_is_kept_after_migration(br):
 
 def test_version_is_v23(br):
     ctx, pg = page_with(br, base_db())
-    assert_("liftlog-v28" in (APP / "sw.js").read_text(), "sw")
-    assert_("Stride · v28" in (APP / "index.html").read_text(), "footer")
+    assert_("liftlog-v29" in (APP / "sw.js").read_text(), "sw")
+    assert_("Stride · v29" in (APP / "index.html").read_text(), "footer")
 
 
 def test_v24_ranges_migrate_only_if_unedited(br):
@@ -144,6 +144,13 @@ def test_v28_next_hint_only_in_open_card(br):
     assert_("tip ok" in src and "Next" in src, "Next hint not rendered in open card")
     closed = pg.evaluate("[...document.querySelectorAll('.ex:not(.open) .ex-sum, .ex:not(.open) summary')].map(e=>e.textContent).join('|')")
     assert_("Next ·" not in closed, closed)
+
+
+def test_v29_cloud_is_worker_and_sw_skips_cross_origin(br):
+    html = (APP / "index.html").read_text(); sw = (APP / "sw.js").read_text()
+    assert_("const CLOUD='https://stride-coach.lokis-space.workers.dev'" in html, "CLOUD url")
+    assert_("origin!==location.origin)return" in sw, "sw must ignore cross-origin requests")
+    assert_(not (APP / "netlify").exists() and not (APP / "package.json").exists(), "netlify files left")
 
 
 def main():

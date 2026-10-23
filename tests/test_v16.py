@@ -524,15 +524,15 @@ def test_user_complaints_stay_fixed(br):
 def test_footer_and_sw_version(br):
     sw = (APP / "sw.js").read_text(); html = (APP / "index.html").read_text()
     v = re.search(r'liftlog-(v\d+)', sw).group(1)
-    assert_(v == "v28" and f"Stride · {v}" in html, v)
+    assert_(v == "v29" and f"Stride · {v}" in html, v)
 
 
 def test_sw_caches_every_file(br):
     sw = (APP / "sw.js").read_text()
     files = set(json.loads(re.search(r"FILES=(\[.*?\])", sw).group(1)))
-    # Dev-only files (tests/, CHANGELOG.md, git) are not part of the offline app
+    # Dev files (tests/, CHANGELOG.md, git) are not part of the offline app
     on_disk = {str(p.relative_to(APP)) for p in APP.rglob("*") if p.is_file() and not any(x.startswith(".") for x in p.relative_to(APP).parts)
-               and p.relative_to(APP).parts[0] != "tests" and p.name != "CHANGELOG.md"}
+               and p.relative_to(APP).parts[0] not in ("tests",) and p.name != "CHANGELOG.md"}
     assert_(on_disk <= files, on_disk - files)
 
 

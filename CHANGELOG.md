@@ -2,6 +2,16 @@
 
 Newest first. Each version is one commit on `main` (v20 onward). `sw.js` cache name and the footer always carry the same version.
 
+## v29 (23 Oct 2026) - Cloud backup + coach tip
+- Finish now sends the whole DB to the `stride-coach` Cloudflare Worker (`https://stride-coach.lokis-space.workers.dev`). It overwrites one cloud copy (Workers KV, key `latest`), so backups never pile up.
+- Same call asks the AI (Kaleris gateway, `STRIDE_MODEL`, default `gpt-6-sol`) for a 2-4 line tip from today's sets, notes and the last same session. Shows as a card on Lift, dismiss with ✕.
+- Offline: queued in `stride.pending`, retried on load and when back online.
+- Save tab: Cloud section with passcode, last cloud backup, Restore from cloud (replace with confirm + undo). File export stays as an optional extra.
+- Backup due nag is off while a cloud backup is under 7 days old.
+- Worker source lives outside the site in `~/Downloads/stride-worker` (wrangler). Secrets `AI_KEY` and `STRIDE_TOKEN` (8+ chars, same as the app passcode, in 1Password as "Stride passcode"). CORS allows only `https://lokis-space.github.io`; other origins get 403.
+- sw.js now ignores every cross-origin request, so cloud calls are never cached. Netlify files removed.
+- Tests: 205 pass (legacy 128, v16 49, v20 15, v23 13). Reverted the netlify test exclusion, added `test_v29_cloud_is_worker_and_sw_skips_cross_origin`. Live Worker round trip checked: POST returns a tip, GET returns the copy, wrong token 401, other origin 403.
+
 ## v28 (22 Oct 2026) - Per side on the Sets line
 - `/ side` and `/ leg` targets now read `Sets 2 · per side` and `Hold start 30 → work to 60 s`, so nothing wraps on a phone.
 - Next hint stays open-card only (from v27).

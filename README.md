@@ -70,3 +70,13 @@ After the legacy suite, `run.sh` runs `test_v16.py` (v16 to v19 regressions), `t
 ## Changelog
 
 Version history is in `CHANGELOG.md`.
+
+## Cloud backup + coach (v29)
+Backend is a Cloudflare Worker (free tier) in a separate folder, `~/Downloads/stride-worker`, not in this site.
+1. `npx wrangler login`, then `npx wrangler kv namespace create STRIDE` and put the id in `wrangler.toml`.
+2. Secrets (never printed or committed):
+   - `op read "op://Employee/<Kaleris AI Gateway item>/credential" | npx wrangler secret put AI_KEY`
+   - `printf %s "<passcode>" | npx wrangler secret put STRIDE_TOKEN` (8+ chars, saved in 1Password as "Stride passcode")
+3. `npx wrangler deploy`. URL: `https://stride-coach.lokis-space.workers.dev` (set as `CLOUD` in index.html).
+4. In the app: Save › Cloud › paste the passcode › Save passcode.
+Finish a session to back up and get a tip. Restore from cloud pulls the latest copy. Only `https://lokis-space.github.io` is allowed by CORS.
